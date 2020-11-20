@@ -1,4 +1,25 @@
-// write your createStore function here
+// A function called createStore that takes in a reducer function as an argument
+// createStore function should return an object with two methods- getState and dispatch
+
+function createStore(candyReducer) {
+  // state should be basic array of strings, or empty 
+  let state; 
+
+  // dispatch should take in an action, update the state using the reducer, and call the render function
+  function dispatch(action) {
+    state = candyReducer(state = [], action)
+    render();
+  }
+
+  // getState should return the current state;
+  function getState() {
+    return state;
+  }
+  return {
+    dispatch, 
+    getState
+  }
+}
 
 function candyReducer(state = [], action) {
   switch (action.type) {
@@ -20,3 +41,6 @@ function render() {
 
 // Use your createStore function and the functions provided here to create a store.
 // Once the store is created, call an initial dispatch.
+
+let store = createStore(candyReducer)
+store.dispatch({ type: '@@INIT' })
